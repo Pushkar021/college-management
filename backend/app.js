@@ -2,16 +2,15 @@ require("dotenv").config();
 const express = require('express');
 const cors = require("cors");
 const { PORT } = process.env;
-const mainrouter = require("./routes/mainrouter")
 
 const app = express();
-
+require("./db")
 // Middleware
 app.use(cors());
 app.use(express.json());
 
 //define the mainroute
-app.use("/main/v1",mainrouter)
+app.use("/user",require("./routes/users"))
 
 
 

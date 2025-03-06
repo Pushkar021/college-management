@@ -1,17 +1,15 @@
-require("dotenv").config();
-const { dburl } = process.env;
 const mongoose = require("mongoose");
-mongoose.connect(dburl);
+const dotenv = require('dotenv');
 
-//schema defination
-const userSchema = mongoose.Schema({
-  enrollment: { type: Number, unique: true, sparse: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  role: { type: String, enum: ["student", "teacher"], required: true },
-});
+mongoose.set('strictQuery', false);
 
-const User = mongoose.model("User", userSchema);
-module.exports = {
-  User,
-};
+mongoose
+  .connect(process.env.MONGO_CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("DATABASE CONNECTED SUCCESSFULLYYYYYY "))
+  .catch((err) => console.log("ERROR CONNECTING TO MONGODBBBBBB", err));
+
+dotenv.config();
+
+
+  //"mongodb://localhost:27017/brightsmile"
+ //process.env.MONGO_CONNECTION_STRING 
