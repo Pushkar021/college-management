@@ -121,7 +121,9 @@ export default function SignUp(){
                     <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded mt-4 hover:bg-blue-600 transition">
                         Sign Up
                     </button>
-                    
+                    <p className="mt-4 text-center text-sm">
+                        Already have an account? <a href="/" className="text-blue-500">Login</a>
+                    </p>
                 </form>
             </div>
         </div>
