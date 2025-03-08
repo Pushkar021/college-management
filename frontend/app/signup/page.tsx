@@ -6,15 +6,31 @@ export default function SignUp(){
 
     const router= useRouter();
     const [userName,setUserName]= useState("");
+    const [email,setEmail] = useState("");
     const [password,setPassword]=useState("");
     const [confirmPassword, setConfirmPassword]= useState("");
     const [role,setRole]=useState("");
     const [enrollment, setEnrollment] = useState("");
     const [error, setError] = useState("");
 
-    // signup function
-    const handleSignUp=(e: React.FormEvent)=>{
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
+
+    //check if username exists
+
+    //password validation function
+    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setPassword(value);
+        setError(regex.test(value) ? "" : "Password must be 8-16 characters and include at least one letter, number, and special character.");
+      };
+
+     // signup function
+     const handleSignUp=async(e: React.FormEvent)=>{
         e.preventDefault();
+
+        if(!regex.test(password)){
+
+        }
 
         if (password !== confirmPassword) {
             setError("Confirm Password!");
@@ -28,20 +44,22 @@ export default function SignUp(){
         // Check if enrollment number already exists
 
         setError("");
+          // Send signup request to backend
+                // const res = await fetch("/api/signup", {
+                //     method: "POST",
+                //     headers: { "Content-Type": "application/json" },
+                //     body: JSON.stringify({ userName, email, password, role, enrollment }),
+                // });
 
-        router.push("/dashboard");
-    }
+                // if (res.ok) {
+                // 
+                //     router.push(`/verify-otp?email=${email}`);
+                // } else {
+                //     setError("Signup failed. Try again.");
+                // }
 
-    //check if username exists
-
-    //password validation function
-    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
-    
-        setPassword(value);
-        setError(regex.test(value) ? "" : "Password must be 8-16 characters and include at least one letter, number, and special character.");
-      };
+        router.push(`/verify-otp?email=${encodeURIComponent(email)}`);
+    };
 
     return(
         <div className="h-screen flex items-center justify-center">
@@ -58,6 +76,19 @@ export default function SignUp(){
                         placeholder="Enter a username"
                         value={userName}
                         onChange={(e) => setUserName(e.target.value)}
+                        required
+                        />
+                    </div>
+
+                    {/* Email Input */}
+                    <div className="mb-4">
+                        <label className="block font-medium">Email</label>
+                        <input
+                        type="email"
+                        className="w-full p-2 border border-gray-300 rounded-md mt-1"
+                        placeholder="Enter email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                         />
                     </div>
@@ -81,10 +112,11 @@ export default function SignUp(){
                         <label className="">Password Confirmation</label>
                         <input
                         type="password"
-                        name="password"
+                        name="confirmPassword"
                         className="w-full p-2 border border-gray-300 rounded-md mt-1"
                         placeholder="Set a Password "
                         title="Password must be 8-16 characters long and include at least one letter, one number, and one special character."
+                        value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         required
                         />

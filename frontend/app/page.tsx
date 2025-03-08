@@ -6,20 +6,14 @@ export default function Login() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [OTP, setOTP] = useState("");
-  const [useOTP, setUseOTP] = useState(false);
-
-  // Toggle between OTP and Password login
-  const toggleOTP = () => setUseOTP(!useOTP);
 
   // Login function
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.trim() && ((useOTP && OTP.length === 5) || (!useOTP && password.length >= 8))) {
+    
+     //login logic
       router.push("/dashboard");
-    } else {
-      alert("Enter valid credentials.");
-    }
+    
   };
 
   return (
@@ -41,34 +35,21 @@ export default function Login() {
             />
           </div>
 
-          {/* OTP or Password Input */}
-          <div className="mb-4">
-            <label className="block font-medium">{useOTP ? "OTP" : "Password"}</label>
-            <input
-              type={useOTP ? "text" : "password"}
-              className="w-full p-2 border border-gray-300 rounded-md mt-1"
-              placeholder={useOTP ? "Enter OTP" : "Enter Password"}
-              value={useOTP ? OTP : password}
-              onChange={(e) => {
-                if (useOTP) {
-                  let regex = /^\d+$/;
-                  if (regex.test(e.target.value) || e.target.value === "") {
-                    setOTP(e.target.value);
-                  }
-                } else {
-                  setPassword(e.target.value);
-                }
-              }}
-              maxLength={useOTP ? 5 : 16}
-              minLength={useOTP ? undefined : 8}
-              required
-            />
-          </div>
+          <div className="mb-4 mt-4">
+                <label className="">Password</label>
+                <input
+                type="password"
+                name="password"
+                className="w-full p-2 border border-gray-300 rounded-md mt-1"
+                placeholder="Set a Password "
+                title="Password must be 8-16 characters long and include at least one letter, one number, and one special character."
+                value={password}
+                onChange={(e)=>setPassword(e.target.value)}
+                required
+                />
+                  
+            </div>
 
-          {/* Toggle between Password & OTP */}
-          <p className="text-sm text-blue-500 cursor-pointer" onClick={toggleOTP}>
-            {useOTP ? "Use Password Instead" : "Use OTP Instead"}
-          </p>
 
           {/* Submit Button */}
           <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded mt-4 hover:bg-blue-600 transition">
