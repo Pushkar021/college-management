@@ -8,7 +8,7 @@ const {
 const userController = require("../controllers/users");
 const authValidator = require("../middlewares/auth");
 const userUpdate = require("../controllers/infoupdate");
-const uploader = require("../controllers/uploadCode");
+const { uploadFile, getAllFiles } = require("../controllers/files");
 
 router.post(
   "/initiate/register",
@@ -18,6 +18,7 @@ router.post(
 const upload = multer({ dest: "uploads/" });
 router.post("/", validateCreateUser, userController.create);
 router.get("/hey", authValidator, userUpdate);
-router.post("/upload", upload.single("file"), uploader);
+router.post("/upload", upload.single("file"), uploadFile);
+router.get("/files", getAllFiles);
 
 module.exports = router;
