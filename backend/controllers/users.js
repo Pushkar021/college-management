@@ -34,9 +34,11 @@ const create = async (req, res) => {
     const { email, mobile_phone, password, token, verificationId } = req.body;
     if (!/^[0-9]+$/.test(token))
       return res.status(400).json({ message: "Invalid OTP" });
-
-    if (await User.findOne({ $or: [{ email }, { mobile_phone }] }))
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      console.log("this is what it is");
       return res.status(400).json({ message: "User already exists" });
+    }
 
     const isVerified = email
       ? await verifyCodeViaEmail(verificationId, token, email)
@@ -48,9 +50,9 @@ const create = async (req, res) => {
       mobile_phone,
       password: encrypt(password, "base64"),
     });
-    const accessToken = encrypt(
-      jwt.sign({ _id: user._id, email }, process.env.JWTSECRET),
-      "base64"
+    const accessToken = await jwt.sign(
+      { _id: user._id, email },
+      process.env.JWTSECRET
     );
 
     res.json({ message: "User Created", user, accessToken });

@@ -1,3 +1,5 @@
+
+
 require("dotenv").config();
 const express = require('express');
 const cors = require("cors");
@@ -11,6 +13,9 @@ app.use(express.json());
 
 //define the mainroute
 app.use("/user",require("./routes/users"))
+
+
+
 
 
 
@@ -36,3 +41,7 @@ app.get("*", (req, res) => {
 app.listen(PORT,()=>{
   console.log(`Server is live on port ${PORT}`)
 })
+
+
+
+
