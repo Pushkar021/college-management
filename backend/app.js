@@ -13,7 +13,7 @@ app.use(express.json());
 
 //define the mainroute
 app.use("/user",require("./routes/users"))
-
+app.use("/file",require("./routes/upload_routes"))
 
 
 
