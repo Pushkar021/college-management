@@ -35,7 +35,7 @@ const uploadFile = async (req, res) => {
 
 const getAllFiles = async (req, res) => {
   try {
-    const files = await File.find(); // Fetch all stored file records
+    const files = await File.find(); 
     res.json(files);
   } catch (error) {
     console.error("Fetch Error:", error);
