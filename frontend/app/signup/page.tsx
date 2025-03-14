@@ -52,7 +52,7 @@ export default function SignUp(){
                 // });
 
                 // if (res.ok) {
-                // 
+                //     
                 //     router.push(`/verify-otp?email=${email}`);
                 // } else {
                 //     setError("Signup failed. Try again.");

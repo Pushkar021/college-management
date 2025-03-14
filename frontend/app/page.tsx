@@ -11,8 +11,10 @@ export default function Login() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     
-     //login logic
+      //login logic
       router.push("/dashboard");
+      // temp
+      localStorage.setItem("role", "student"); 
     
   };
 
