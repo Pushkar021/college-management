@@ -27,12 +27,16 @@ export default function VerifyOTP() {
                 //     body: JSON.stringify({ email, otp }),
                 //     headers: { "Content-Type": "application/json" },
                 // });
-
+                // const data = await res.json();
                 // if (res.ok) {
+                //   localStorage.setItem("role", data.role); 
                 //     router.push("/dashboard"); 
                 // } else {
                 //     setError("Invalid OTP. Try again.");
                 // }
+
+                // temp
+                localStorage.setItem("role", "student"); 
     };
 
     return (

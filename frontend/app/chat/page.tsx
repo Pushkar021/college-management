@@ -2,8 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function Dashboard(){
-
+export default function Chat(){
     const [role, setRole] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
     const router = useRouter();
@@ -28,14 +27,8 @@ export default function Dashboard(){
       );
     }
 
-  return (
-    <div className="min-h-screen">
-            
-            {role=="student"?<></>:<></>}
-
-            {/* main page here  */}
-
-
-    </div>
-  );
+    return(
+        <></>
+    )
+    
 }
