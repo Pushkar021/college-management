@@ -8,7 +8,7 @@ const UserSchema = new Schema(
     profile_image: { type: String, default: null },
     enrollment: { type: BigInt, default: null },
     email: { type: String, default: null },
-    mobile_phone: { type: String, default: null },
+    mobile_phone: { type: Number, default: null },
     emailVerified: { type: Boolean, default: false },
     mobilePhoneVerified: { type: Boolean, default: false },
     status: {
