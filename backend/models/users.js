@@ -6,7 +6,7 @@ const UserSchema = new Schema(
     first_name: { type: String, default: null },
     last_name: { type: String, default: null },
     profile_image: { type: String, default: null },
-    enrollment: { type: BigInt, default: null },
+    enrollment: { type: String, default: null }, 
     email: { type: String, default: null },
     mobile_phone: { type: Number, default: null },
     emailVerified: { type: Boolean, default: false },
@@ -23,10 +23,12 @@ const UserSchema = new Schema(
       enum: ["user", "teacher"],
       default: "user",
     },
-    invalid_jwt: [{
-      token: { type: String },
-      expiry: { type: Date }
-    }],
+    invalid_jwt: [
+      {
+        token: { type: String },
+        expiry: { type: Date },
+      },
+    ],
   },
   {
     collection: "users",

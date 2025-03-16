@@ -4,6 +4,7 @@ const fileSchema = new mongoose.Schema(
   {
     filename: { type: String },
     url: { type: String, required: true },
+    subject: { type: String, required: true },
   },
   {
     collection: "fileUrl",
@@ -11,6 +12,6 @@ const fileSchema = new mongoose.Schema(
   }
 );
 
-const file = mongoose.model("file", fileSchema);
+const File = mongoose.model("File", fileSchema);
 
-module.exports = file;
+module.exports = File;

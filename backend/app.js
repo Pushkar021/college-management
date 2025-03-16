@@ -4,19 +4,14 @@ require("dotenv").config();
 const express = require('express');
 const cors = require("cors");
 const { PORT } = process.env;
+const assignmentRoutes = require("./routes/assignmentRoutes");
+const submissionRoutes = require("./routes/submissionRoutes");
 
 const app = express();
 require("./db")
 // Middleware
 app.use(cors());
 app.use(express.json());
-
-//define the mainroute
-app.use("/user",require("./routes/users"))
-app.use("/file",require("./routes/upload_routes"))
-
-
-
 
 
 
@@ -25,6 +20,18 @@ app.use((req, res, next) => {
     res.header("Cross-Origin-Resource-Policy", "cross-origin");
     next();
   });
+// Use assignment-related routes
+app.use("/assignments", assignmentRoutes);
+
+// Use student submission-related routes
+app.use("/submissions", submissionRoutes);
+
+app.use("/user", require("./routes/users"));
+
+
+
+
+
 
 
   // Routes
